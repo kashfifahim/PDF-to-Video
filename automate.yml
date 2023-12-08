@@ -1,0 +1,41 @@
+crosscompute: 0.9.4
+name: PDF to Video
+version: 0.1.0
+input:
+  variables:
+    - id: pdf_input
+      view: file
+      path: input.pdf
+      label: Select Your PDF File
+    # - id: image_archive
+    #   view: file
+    #   path: Archive.zip
+    #   label: Select Your Zip File
+    - id: duration
+      view: number
+      path: variables.dictionary
+      label: Duration for each image
+  templates:
+    - path: input.md
+output:
+  variables:
+    - id: video_file
+      view: link
+      path: output_video.mp4
+      label: Click on the link below to download your video
+  templates:
+    - path: output.md
+batches:
+  - folder: batches/standard
+scripts:
+  - path: run.py
+environment:
+  packages:
+    - id: opencv-python
+      manager: pip
+    - id: zipfile36
+      manager: pip
+    - id: PyPDF2
+      manager: pip
+    - id: pdf2image
+      manager: pip
