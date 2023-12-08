@@ -5,7 +5,6 @@ CrossCompute's Slideshow-to-Video Converter is the perfect solution for transfor
 
 ### How to Use the Tool
 **Step 1: Prepare Your Slides**
-![Alt text](/asset_01.png)
 Most presentation software, like PowerPoint or Google Slides, offers an option to export slides as a PDF file. Export your presentation as a PDF file. 
 
 **Step 2: Choose Your PDF file**
