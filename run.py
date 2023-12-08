@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 import shutil
 from image_processing import images_to_video, natural_sort_key
-from pdf_processing import pdf_to_images
+from pdf_processing import pdf_to_images, pdf_to_images_mupdf
 
 if __name__ == '__main__':
     print("Script started")
@@ -34,7 +34,7 @@ if __name__ == '__main__':
         raise ValueError("No PDF file found in the input folder")
     pdf_file = pdf_files[0]
     print(f"PDF file found: {pdf_file}")
-    pdf_to_images(pdf_file, extract_to_folder)
+    pdf_to_images_mupdf(pdf_file, extract_to_folder)
     
     # # Finding the first zip file in the input folder
     # zip_files = list(input_folder.glob('*.zip'))
