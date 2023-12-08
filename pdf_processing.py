@@ -4,7 +4,7 @@ import zipfile
 from pathlib import Path
 
 
-def pdf_to_images_mupdf(pdf_path, output_folder):
+def pdf_to_images(pdf_path, output_folder):
     # Check if output folder exists, if not, create it
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
