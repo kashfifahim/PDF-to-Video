@@ -2,8 +2,6 @@ import fitz
 import os
 import zipfile
 from pathlib import Path
-from PyPDF2 import PdfReader
-from pdf2image import convert_from_path
 
 
 def pdf_to_images_mupdf(pdf_path, output_folder):
@@ -23,26 +21,6 @@ def pdf_to_images_mupdf(pdf_path, output_folder):
     
     # Close the document
     doc.close()
-
-
-def pdf_to_images(pdf_path, output_folder):
-    # Check if output folder exists, if not, create it
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-    
-    # Read the PDF file
-    with open(pdf_path, 'rb') as file:
-        reader = PdfReader(file)
-        num_pages = len(reader.pages)
-    
-        # Convert each page to an image
-        for page_number in range(num_pages):
-            # Convert the current page to image
-            images = convert_from_path(pdf_path, first_page=page_number + 1, last_page=page_number + 1)
-
-            # Save the image
-            for image in images:
-                image.save(os.path.join(output_folder, f'page_{page_number + 1}.png'), 'PNG')
 
 
 def zip_folder(folder_path, output_zip_file):

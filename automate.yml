@@ -7,14 +7,10 @@ input:
       view: file
       path: input.pdf
       label: Select Your PDF File
-    # - id: image_archive
-    #   view: file
-    #   path: Archive.zip
-    #   label: Select Your Zip File
     - id: duration
       view: number
       path: variables.dictionary
-      label: Duration for each image
+      label: Select how many seconds you would want each slide to be displayed in the video.
   templates:
     - path: input.md
 output:
@@ -34,10 +30,6 @@ environment:
     - id: opencv-python
       manager: pip
     - id: zipfile36
-      manager: pip
-    - id: PyPDF2
-      manager: pip
-    - id: pdf2image
       manager: pip
     - id: PyMuPDF
       manager: pip

@@ -5,17 +5,18 @@ CrossCompute's Slideshow-to-Video Converter is the perfect solution for transfor
 
 ### How to Use the Tool
 **Step 1: Prepare Your Slides**
+![Alt text](/asset_01.png)
 Most presentation software, like PowerPoint or Google Slides, offers an option to export slides as a PDF file. Export your presentation as a PDF file. 
 
-**Step 2: Select Your PDF file**
+**Step 2: Choose Your PDF file**
+{ pdf_input }
 
 **Step 3: Set Duration**
 We give you the option to select how many seconds you would want each slide to be displayed in the video.
+{ duration }
+
 
 **Step 4: Click *Continue***
-
-**{ pdf_input } { duration }**
-
 { BUTTON_PANEL }
 
 The tool will process your presentation and convert it to a .mp4 video file to be downloaded.
