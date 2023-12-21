@@ -79,51 +79,49 @@ def natural_sort_key(s):
 
 
 def resize_image(image, target_width, target_height):
-    """
-    Resize an image to fit within the specified dimensions while maintaining the original aspect ratio.
-    If the resized image does not match the target dimensions, it is padded with black color to fill the gaps.
+    # Validate input image
+    if image is None or len(image.shape) < 2:
+        print("Invalid image input")
+        raise ValueError("Invalid image input")
 
-    The function calculates the new dimensions of the image based on the target dimensions while preserving
-    the aspect ratio. If the new dimensions are smaller than the target dimensions in either width or height,
-    the image is padded with black color on the top/bottom or left/right respectively.
-
-    Parameters:
-    image (ndarray): The image to be resized, represented as a NumPy array.
-    target_width (int): The desired width of the image after resizing and padding.
-    target_height (int): The desired height of the image after resizing and padding.
-
-    Returns:
-    ndarray: The resized and padded image as a NumPy array.
-
-    Note:
-    This function requires OpenCV (cv2) for image processing.
-
-    Example:
-    >>> img = cv2.imread('path/to/image.jpg')
-    >>> resized_img = resize_image(img, 800, 600)
-    >>> cv2.imshow('Resized Image', resized_img)
-    >>> cv2.waitKey(0)
-    >>> cv2.destroyAllWindows()
-    """
+    # Get original image dimensions
     original_height, original_width = image.shape[:2]
+    print(f"Original dimensions: Width={original_width}, Height={original_height}")
+
+    # Check if original dimensions are non-zero
+    if original_height == 0 or original_width == 0:
+        print("Image dimensions are zero")
+        raise ValueError("Image dimensions are zero")
+
+    # Calculate aspect ratio
     aspect_ratio = original_width / original_height
-    
+    print(f"Aspect ratio: {aspect_ratio}")
+
+    # Determine new dimensions while maintaining aspect ratio
     if original_width > original_height:
         new_width = target_width
-        new_height = int(target_width / aspect_ratio)
+        new_height = max(int(target_width / aspect_ratio), 1)
     else:
         new_height = target_height
-        new_width = int(target_height * aspect_ratio)
+        new_width = max(int(target_height * aspect_ratio), 1)
+    print(f"New dimensions: Width={new_width}, Height={new_height}")
 
+    # Resize the image
     resized_image = cv2.resize(image, (new_width, new_height))
-    
-    # If the new dimensions are smaller in any direction, pad the resized image with black color
-    top_padding = (target_height - new_height) // 2
-    bottom_padding = target_height - new_height - top_padding
-    left_padding = (target_width - new_width) // 2
-    right_padding = target_width - new_width - left_padding
+    print("Image resized successfully")
 
-    return cv2.copyMakeBorder(resized_image, top_padding, bottom_padding, left_padding, right_padding, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+    # Calculate padding needed for target dimensions
+    top_padding = max((target_height - new_height) // 2, 0)
+    bottom_padding = max(target_height - new_height - top_padding, 0)
+    left_padding = max((target_width - new_width) // 2, 0)
+    right_padding = max(target_width - new_width - left_padding, 0)
+    print(f"Padding: Top={top_padding}, Bottom={bottom_padding}, Left={left_padding}, Right={right_padding}")
+
+    # Add padding and return final image
+    final_image = cv2.copyMakeBorder(resized_image, top_padding, bottom_padding, left_padding, right_padding, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+    print("Padding added, final image ready")
+
+    return final_image
 
 
 def images_to_video(image_paths, output_video_file, fps=30, duration=5, target_width=1920, target_height=1080):
